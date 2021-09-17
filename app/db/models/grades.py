@@ -1,15 +1,12 @@
 import datetime
 from decimal import Decimal
-from sqlalchemy import Column, Integer, DECIMAL, String, DateTime
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, Numeric, String, DateTime
 
-Base = declarative_base()
+from db.base_class import Base
 
-class User(Base):
-    __tablename__ = "grade_info"
-    grade_no = Column(Integer, autoincrement=True)
+class Grade(Base):
+    grade_no = Column(Integer, primary_key=True, autoincrement=True)
     user_no = Column(Integer)
     book_no = Column(Integer)
-    title = Column(String)
-    grade = Column(Decimal(3, 1))
+    grade = Column(Numeric)
     createtime = Column(DateTime, default=datetime.datetime.now())

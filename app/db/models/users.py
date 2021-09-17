@@ -1,12 +1,10 @@
 import datetime
 from sqlalchemy import Column, Integer, String, DateTime
-from sqlalchemy.ext.declarative import declarative_base
 
-Base = declarative_base()
+from db.base_class import Base
 
 class User(Base):
-    __tablename__ = "user_info"
-    user_no = Column(Integer, autoincrement=True)
-    id = Column(String)
-    pw = Column(String)
+    user_no = Column(Integer, primary_key=True, autoincrement=True)
+    id = Column(String(50))
+    pw = Column(String(50))
     createtime = Column(DateTime, default=datetime.datetime.now())

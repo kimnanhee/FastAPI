@@ -1,15 +1,12 @@
 import datetime
 from sqlalchemy import Column, Integer, String, Date, DateTime
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.sql.sqltypes import Date
 
-Base = declarative_base()
+from db.base_class import Base
 
-class User(Base):
-    __tablename__ = "book_info"
-    book_no = Column(Integer, autoincrement=True)
-    title = Column(String)
+class Book(Base):
+    book_no = Column(Integer, primary_key=True, autoincrement=True)
+    title = Column(String(100))
     price  = Column(Integer)
     publication_date = Column(Date)
-    writer = Column(String)
+    writer = Column(String(50))
     createtime = Column(DateTime, default=datetime.datetime.now())
