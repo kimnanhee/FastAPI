@@ -3,8 +3,6 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 import sqlalchemy as db
 
-engine = db.create_engine("mysql+mysqldb://root:chun0225!@127.0.0.1:3306/test?charset=utf8", encoding="utf-8",  convert_unicode=False)
-connection = engine.connect()
 metadata = db.MetaData()
 user_info = db.Table('user_info', metadata, autoload_with=engine)
 
