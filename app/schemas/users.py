@@ -1,4 +1,11 @@
 from pydantic import BaseModel
 
-class UserCreate(BaseModel):
-    pass
+class CreateUser(BaseModel):
+    id : str
+    pw : str
+
+class ShowUser(BaseModel):
+    id : str
+
+    class Config():
+        orm_mode = True
