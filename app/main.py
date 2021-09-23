@@ -16,7 +16,8 @@ def include_router(app):
 
 
 def start_application():
-    app = FastAPI(title="NH recommand", version="0.0.1")
+    # app = FastAPI(title="NH recommand", version="0.1.0")
+    app = FastAPI()
     create_tables()
     include_router(app)
     return app
