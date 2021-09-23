@@ -1,12 +1,11 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic.errors import SequenceError
 from sqlalchemy.orm import Session
 
 from db.session import get_db
 from db.models.books import Book
-from db.repository.books import create_new_book, retreive_book, list_books
 from schemas.books import CreateBook, ShowBook
-from db.models.users import User
+from db.repository.books import create_new_book, retreive_book, list_books, update_book_by_id, delete_book_by_id
 from typing import List
 
 router = APIRouter()
@@ -21,10 +20,29 @@ def retreive_book_by_id(book_no : int, db : Session = Depends(get_db)):
     book = retreive_book(book_no=book_no, db=db)
     print(book)
     if not book:
-        return f"book with id {id} does not exist"
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+        detail = f"book with id {id} does not exist")
     return book
 
 @router.get("/all", response_model=List[ShowBook])
 def retreive_all_books(db : Session = Depends(get_db)):
     books = list_books(db=db)
     return books
+
+@router.put("/update/{book_no}")
+def update_book(book_no: int, book: CreateBook, db: Session=Depends(get_db)):
+    book_retreive = retreive_book(book_no=book_no, db=db)
+    if not book_retreive:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+        detail = f"book with id {id} does not exist")
+    _ = update_book_by_id(book_no=book_no, book=book, db=db)
+    return {"message":"success update data"}
+
+@router.delete("/delete/{book_bo}")
+def delete_book(book_no: int, db: Session=Depends(get_db)):
+    book = retreive_book(id=id, db=db)
+    if not book:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+        detail = f"book with id {id} does not exist")
+    _ = delete_book_by_id(book_no=book_no, db=db)
+    return {"message":"success delete data"}
