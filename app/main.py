@@ -15,11 +15,16 @@ def include_router(app):
     app.include_router(webapp_router)
 
 
+def configure_static(app):
+    app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
 def start_application():
     # app = FastAPI(title="NH recommand", version="0.1.0")
     app = FastAPI()
     create_tables()
     include_router(app)
+    configure_static(app)
     return app
 
 
