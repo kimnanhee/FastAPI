@@ -1,0 +1,37 @@
+{% extends "shared/base.html" %}
+
+
+{% block title %}
+  <title>Create a Book Post</title>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="text-danger font-weight-bold">
+        {% for error in errors %}
+          <li>{{error}}</li>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="row my-5">
+      <h3 class="text-center display-4">Create a Book Post</h3>
+      <form method="POST">
+        <div class="mb-3">
+          <input type="text" required placeholder="Book Title here" name="title" value="{{title}}" class="form-control">
+        </div>
+        <div class="mb-3">
+          <input type="text" required placeholder="Book Price here" name="price" value="{{price}}" class="form-control">
+        </div>
+        <div class="mb-3">
+          <input type="text" required placeholder="Book Publication date e.g. YYYY-MM-DD" name="publication_date" value="{{publication_date}}" class="form-control">
+        </div>
+        <div class="mb-3">
+          <input type="text" required placeholder="Book Writer here" name="writer" value="{{writer}}" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+  {% endblock %}
