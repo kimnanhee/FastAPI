@@ -21,7 +21,7 @@ def retreive_book_by_id(book_no : int, db : Session = Depends(get_db)):
     print(book)
     if not book:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-        detail = f"book with id {id} does not exist")
+        detail = f"book with No. {book_no} does not exist")
     return book
 
 @router.get("/all", response_model=List[ShowBook])
@@ -34,15 +34,15 @@ def update_book(book_no: int, book: CreateBook, db: Session=Depends(get_db)):
     book_retreive = retreive_book(book_no=book_no, db=db)
     if not book_retreive:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-        detail = f"book with id {id} does not exist")
+        detail = f"book with No. {book_no} does not exist")
     _ = update_book_by_id(book_no=book_no, book=book, db=db)
     return {"message":"success update data"}
 
-@router.delete("/delete/{book_bo}")
+@router.delete("/delete/{book_no}")
 def delete_book(book_no: int, db: Session=Depends(get_db)):
-    book = retreive_book(id=id, db=db)
+    book = retreive_book(book_no=book_no, db=db)
     if not book:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-        detail = f"book with id {id} does not exist")
+        detail = f"book with No. {book_no} does not exist")
     _ = delete_book_by_id(book_no=book_no, db=db)
     return {"message":"success delete data"}
