@@ -1,0 +1,42 @@
+{% extends "shared/base.html" %}
+
+
+{% block title %}
+  <title>Search Book</title>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 class="display-5 text-center text-danger mb-3">Search Books</h1>
+    </div>
+    <div id="result" class="text-danger text-bold lead"></div>
+  </div>
+
+  <div class="row">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Book No.</th>
+            <th scope="col">Title</th>
+            <th scope="col">Price</th>
+            <th scope="col">Publication Date</th>
+            <th scope="col">Writer</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for book in books %} 
+            <tr>
+                <th scope="row">{{book.book_no}}</th>
+                <td>{{book.title}}</td>
+                <td>{{book.price}}</td>
+                <td>{{book.publication_date}}</td>
+                <td>{{book.writer}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
