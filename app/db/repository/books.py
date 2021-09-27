@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from sqlalchemy import or_
 
 from schemas.books import CreateBook
 from db.models.books import Book
@@ -16,6 +17,10 @@ def retreive_book(book_no: int, db : Session):
 
 def list_books(db : Session):
     books = db.query(Book).all()
+    return books
+
+def list_books_name(title: str, db: Session):
+    books = db.query(Book).filter(or_(Book.title.like(f"%{title}%"), Book.writer.like(f"%{title}%")))
     return books
 
 def update_book_by_id(book_no: int, book: CreateBook, db: Session):
