@@ -34,24 +34,27 @@
                 <td>{{book.price}}</td>
                 <td>{{book.publication_date}}</td>
                 <td>{{book.writer}}</td>
-                <td><button class="btn btn-danger btn-sm" onclick="delete_book({{book.book_no}})">Delete</button></td>
+                <td><button class="btn btn-danger btn-sm" onclick="delete_book('{{book.book_no}}')">Delete</button></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
   </div>
+  <button class="btn btn-danger btn-sm" onClick="window.location.reload()" style="cursor: pointer;">Reload</a>
 </div>
+
+
 {% endblock %}
 
 {% block scripts %} 
 <script type="text/javascript">
-    function delete_book(book_no){
-        fetch('/books/delete/'+book_no,{
-            method:'DELETE',
-        })
-        .then(response => response.json())
-        .then(document.getElementById('result').innerHTML = "Refreshing")
-        .then(data => document.getElementById("result").innerHTML = data.detail);
-    }
+  function delete_book(book_no){
+      fetch('/books/delete/'+book_no,{
+          method:'DELETE',
+      })
+      .then(response => response.json())
+      .then(document.getElementById('result').innerHTML = "Refreshing")
+      .then(data => document.getElementById("result").innerHTML = data.detail);
+  }
 </script>
 {% endblock %}
