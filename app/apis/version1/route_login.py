@@ -11,6 +11,8 @@ def authenticate_user(id: str, pw: str, db: Session):
     print(user)
     if not user:
         return False
+    if not user.pw == pw:
+        return False
     return user
 
 @router.post("/create_session/{id}")
