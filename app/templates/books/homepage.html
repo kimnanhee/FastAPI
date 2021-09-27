@@ -6,12 +6,12 @@
 
 {% block content %} 
 <div class="container">
-      <h1 class="display-4 text-danger">Find Jobs...</h1>
+      <h1 class="display-4 text-danger">Find Books...</h1>
 
   <div class="row">
-    {% for job in jobs %}
+    {% for book in books %}
       <div class="col-lg-4 col-md-3 col-sm-10 mr-auto">
-        {% with obj=job %}
+        {% with obj=book %}
           {% include "components/card.html" %}
         {% endwith %}
 
