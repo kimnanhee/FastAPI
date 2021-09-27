@@ -22,10 +22,10 @@
           <input type="text" required placeholder="Book Title here" name="title" value="{{title}}" class="form-control">
         </div>
         <div class="mb-3">
-          <input type="text" required placeholder="Book Price here" name="price" value="{{price}}" class="form-control">
+          <input type="number" required placeholder="Book Price here" name="price" min="0", value="{{price}}" class="form-control">
         </div>
         <div class="mb-3">
-          <input type="text" required placeholder="Book Publication date e.g. YYYY-MM-DD" name="publication_date" value="{{publication_date}}" class="form-control">
+          <input type="date" required placeholder="Book Publication date e.g. YYYY-MM-DD" name="publication_date" value="{{publication_date}}" class="form-control">
         </div>
         <div class="mb-3">
           <input type="text" required placeholder="Book Writer here" name="writer" value="{{writer}}" class="form-control">
