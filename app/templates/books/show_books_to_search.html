@@ -23,6 +23,7 @@
             <th scope="col">Price</th>
             <th scope="col">Publication Date</th>
             <th scope="col">Writer</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -33,6 +34,7 @@
                 <td>{{book.price}}</td>
                 <td>{{book.publication_date}}</td>
                 <td>{{book.writer}}</td>
+                <td><a href="/detail/{{book.book_no}}" class="btn btn-danger btn-sm">View Detail</a></td>
             </tr>
             {% endfor %}
         </tbody>
