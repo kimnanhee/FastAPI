@@ -7,4 +7,5 @@ class User(Base):
     user_no = Column(Integer, primary_key=True, autoincrement=True)
     id = Column(String(50), unique=True)
     pw = Column(String(50))
+    hashed_pw = Column(String(200))
     createtime = Column(DateTime, default=datetime.datetime.now())
