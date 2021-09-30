@@ -44,7 +44,7 @@ async def book_detail(book_no: int, request: Request, db: Session=Depends(get_db
         try:
             token = request.cookies.get("access_token")
             scheme, param = get_authorization_scheme_param(token)
-            current_user: User = get_current_user_from_token(token=param, db=db)
+            current_user: User = get_current_user_from_token(token=param, db=db)    
             grade = CreateGrade(user_no=current_user.user_no, book_no=book_no, grade=form.__dict__.get("rate"))
             grade = create_new_grade(grade=grade, db=db)
             return responses.RedirectResponse(f"/detail/{book_no}?msg=Succesfully-Registered", status_code=status.HTTP_302_FOUND)
