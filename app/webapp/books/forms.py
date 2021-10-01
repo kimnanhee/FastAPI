@@ -36,18 +36,15 @@ class BookRateForm:
     def __init__(self, request: Request):
         self.request: Request=request
         self.errors: List=[]
-        self.rate: Optional[int]=None
+        self.value: Optional[int]=None
 
     async def load_data(self):
         form = await self.request.form()
-        if form.get("rating"):
-            self.rate = 6-int(form.get("rating"))
-        else:
-            self.rate = 0
+        self.value = int(form.get("rating")) if form.get("rating") else 0
 
     def is_vaild(self):
-        if not self.rate:
-            self.errors.append("A valid rate is required")
+        if not self.value:
+            self.errors.append("A valid rating is required")
 
         if not self.errors:
             return True
