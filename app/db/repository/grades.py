@@ -1,14 +1,20 @@
 from sqlalchemy.orm import Session
+from sqlalchemy.sql.expression import and_
 
 from schemas.grades import CreateGrade
 from db.models.grades import Grade
 
 def create_new_grade(grade: CreateGrade, db: Session):
-    grade = Grade(user_no=grade.user_no, book_no=grade.book_no, grade=grade.grade)
-    db.add(grade)
-    db.commit()
-    db.refresh(grade)
-    return grade
+    existing_grade = db.query(Grade).filter((Grade.user_no == grade.user_no) & (Grade.book_no == grade.book_no)).first()
+    if existing_grade:
+        db.query(Grade).filter((Grade.user_no == grade.user_no) & (Grade.book_no == grade.book_no)).update({"value": grade.value})
+        db.commit()
+    else:
+        grade = Grade(user_no=grade.user_no, book_no=grade.book_no, value=grade.value)
+        db.add(grade)
+        db.commit()
+        db.refresh(grade)
+        return grade
 
 def retreive_grade(grade_no: int, db: Session):
     grade = db.query(Grade).filter(Grade.grade_no == grade_no).first()
