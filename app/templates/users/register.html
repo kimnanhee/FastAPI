@@ -1,7 +1,7 @@
 {% extends "shared/base.html" %} 
 
 {% block title %} 
-  <title>Signup to BR</title>
+  <title>Signup</title>
 {% endblock %} 
 
 {% block content %} 
@@ -14,16 +14,16 @@
         {% endfor %}
       </div>
 
+      <br><br>
+
       <form method="POST">
           <div class="mb-3">
               <label>id</label>
-              <input type="text" required class="form-control" name="id"
-              value="{{id}}" placeholder="id">
+              <input type="text" required placeholder="Your ID" name="id" value="{{id}}" class="form-control">
           </div>
         <div class="mb-3">
             <label>pw</label>
-            <input type="password" required class="form-control" name="pw"
-            value="{{pw}}" placeholder="pw">
+            <input type="password" required placeholder="Choose a secure password" name="pw" value="{{pw}}" class="form-control">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
