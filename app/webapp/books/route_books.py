@@ -60,12 +60,12 @@ async def book_detail(book_no: int, request: Request, db: Session=Depends(get_db
     return templates.TemplateResponse("books/detail.html", {"request": request, "book": book, "errors": form.__dict__.get("errors")})
 
 
-@router.get("/post-a-book/")
+@router.get("/create-book/")
 def create_job(request: Request, db: Session=Depends(get_db)):
     return templates.TemplateResponse("books/create_book.html", {"request": request})
 
 
-@router.post("/post-a-book/")
+@router.post("/create-book/")
 async def create_job(request: Request, db: Session=Depends(get_db)):
     form = BookCreateForm(request)
     await form.load_data()
