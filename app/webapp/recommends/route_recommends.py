@@ -41,10 +41,11 @@ def recommend(request: Request, db: Session=Depends(get_db)):
             book_list = [[((result[i]*100)//1)/5, retreive_book(book_no=book_no, db=db)] for i, book_no in enumerate(books)]
             book_list.sort(key=lambda x: -x[0])
             print(book_list)
+            return templates.TemplateResponse("books/show_books_to_recommend.html", {"request": request, "books": book_list})
 
         else: # 모든 책에 평점을 메김
             return templates.TemplateResponse("books/show_books_to_recommend.html", {"request": request, "errors": ["You have rated all books. If other books are added, I will recommend them!!"]})
     except Exception as e:
         print(e)
         return templates.TemplateResponse("books/show_books_to_recommend.html", {"request": request, "errors": ["You might not be logged in, In case problem persists please contact us."]})
-    return templates.TemplateResponse("books/show_books_to_recommend.html", {"request": request, "books": book_list})
+    
